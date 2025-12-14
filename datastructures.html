@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data Structures</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+	<header>
+		<h1>DATA STRUCTURES - PYTHON</h1>
+	</header>
+
+
+	<nav>
+	<a href="index.html">Home</a>
+	<a href="algorithms.html">Algorithms</a>
+	<a href="pseudocode.html">Pseudocode</a>
+	<a href="datastructures.html" class="active">Data Structures</a>
+	</nav>
+
+
+	<div class="card">
+
+		<h2>Array</h2>
+			<pre>
+			arr = [1, 2, 3, 4, 5]
+			print(arr[0])  
+			print()
+
+			arr.append(6)
+			arr.remove(3)
+
+			for item in arr:
+			    print(item)
+
+			 OUTPUT:
+			 1
+
+			 1
+			 2
+			 4
+			 5
+			 6
+			</pre>
+
+
+		<h2>Stack (Infix, Prefix, Postfix)</h2>
+			<pre>
+			def infix_to_postfix(expression):
+
+			    stack = []
+			    postfix = []
+			    precedence = {'+':1, '-':1, '*':2, '/':2}
+			    
+			    for token in expression.split():
+			        if token.isalnum():  # Operand (A, B, C...)
+			            postfix.append(token)
+			        else:  
+			            while stack and precedence.get(stack[-1],0) >= precedence[token]:
+			                postfix.append(stack.pop())
+			            stack.append(token)
+			    
+			    while stack:
+			        postfix.append(stack.pop())
+			    
+			    return ' '.join(postfix)
+
+			expr = "A + B - C * D / E"
+			postfix_expr = infix_to_postfix(expr)
+			print(postfix_expr)
+
+			-----------------------------------------------------------------------------
+
+			def infix_to_prefix(expression):
+			    
+			    tokens = expression.split()[::-1]
+			    stack = []
+			    prefix = []
+			    precedence = {'+':1, '-':1, '*':2, '/':2}
+			    
+			    for token in tokens:
+			        if token.isalnum():
+			            prefix.append(token)
+			        else:
+			            while stack and precedence.get(stack[-1],0) > precedence[token]:
+			                prefix.append(stack.pop())
+			            stack.append(token)
+			    
+			    while stack:
+			        prefix.append(stack.pop())
+			    
+			    
+			    return ' '.join(prefix[::-1])
+
+			expr = "A + B - C * D / E"
+			prefix_expr = infix_to_prefix(expr)
+			print(prefix_expr)
+			</pre>
+
+
+		<h2>Queue</h2>
+			<pre>
+			from collections import deque
+
+			queue = deque()
+
+			queue.append(2)
+			queue.append(3)
+			queue.append(1)
+
+
+			print(queue.popleft())  
+
+			if queue:
+			    print(queue[0])      
+			else:
+			    print(False)
+
+
+			OUTPUT:
+			2
+			3
+			</pre>
+
+
+		<h2>Tree Traversal</h2>
+			<pre>				
+			class Node:
+			    def __init__(self, data):
+			        self.data = data
+			        self.left = None
+			        self.right = None
+
+
+			root = Node(1)
+			root.left = Node(2)
+			root.right = Node(3)
+			root.left.left = Node(4)
+			root.left.right = Node(5)
+
+
+			def inorder(node):
+			    if node:
+			        inorder(node.left)
+			        print(node.data, end=' ')
+			        inorder(node.right)
+
+
+			def preorder(node):
+			    if node:
+			        print(node.data, end=' ')
+			        preorder(node.left)
+			        preorder(node.right)
+
+
+			def postorder(node):
+			    if node:
+			        postorder(node.left)
+			        postorder(node.right)
+			        print(node.data, end=' ')
+
+			print("Inorder:")
+			inorder(root)
+			print()
+
+			print("\nPreorder:")
+			preorder(root)
+			print()
+
+			print("\nPostorder:")
+			postorder(root) 
+
+
+			OUTPUT:
+			Inorder:
+			4 2 5 1 3 
+
+			Preorder:
+			1 2 4 5 3 
+
+			Postorder:
+			4 5 2 3 1 
+			</pre>
+
+	</div>
+
+
+</body>
+</html>

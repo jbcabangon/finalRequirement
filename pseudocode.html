@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pseudocode</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+	<header>
+		<h1>PSEUDOCODES</h1>
+	</header>
+
+
+	<nav>
+		<a href="index.html">Home</a>
+		<a href="algorithms.html">Algorithms</a>
+		<a href="pseudocode.html" class="active">Pseudocode</a>
+		<a href="datastructures.html">Data Structures</a>
+	</nav>
+
+
+	<div class="card">
+
+		<h2>1. Bubble Sort</h2>
+			<pre>
+			FOR i = 0 to n-1
+			 FOR j = 0 to n-i-1
+			  IF arr[j] > arr[j+1]
+			   SWAP
+			</pre>
+
+
+		<h2>2. Selection Sort</h2>
+			<pre>
+			FOR i = 0 to n-1
+			 min = i
+			  FOR j = i+1 to n
+			   IF arr[j] < arr[min]
+			    min = j
+			     SWAP
+			</pre>
+
+
+		<h2>3. Insertion Sort</h2>
+			<pre>
+			FOR i = 1 to n
+			 key = arr[i]
+			  j = i-1
+			   WHILE j >= 0 AND arr[j] > key
+			    arr[j+1] = arr[j]
+			     INSERT key
+			</pre>
+
+
+		<h2>4. Linear Search</h2>
+			<pre>
+			FOR each element
+			 IF element == key
+			  FOUND
+			</pre>
+
+
+		<h2>5. Binary Search</h2>
+			<pre>
+			SET low, high
+			 WHILE low <= high
+			  mid = (low + high)/2
+			   IF key == arr[mid]
+			    FOUND
+			</pre>
+
+
+		<h2>6. Factorial</h2>
+			<pre>
+			IF n == 0
+			 RETURN 1
+			  ELSE
+			   RETURN n * factorial(n-1)
+			</pre>
+
+
+		<h2>7. Fibonacci Sequence</h2>
+			<pre>
+			SET a = 0, b = 1
+			 FOR i = 1 to n
+			  PRINT a
+			   a = b
+			    b = a + b
+			</pre>
+
+
+		<h2>8. Palindrome Check</h2>
+			<pre>
+			REVERSE string
+			 IF original == reverse
+			  PALINDROME
+			</pre>
+
+		<h2>9. Prime Number Check</h2>
+			<pre>
+			FOR i = 2 to n-1
+			 IF n % i == 0
+			  NOT PRIME
+			</pre>
+
+		<h2>10. Greatest Common Divisor (GCD)</h2>
+			<pre>
+			WHILE b !=0
+			 temp = b
+			  b = a % b
+			   a = temp
+			</pre>
+
+	</div>
+
+
+</body>
+</html>
