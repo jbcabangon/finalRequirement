@@ -3,6 +3,7 @@
 <head>
 	<title>Data Structures</title>
 	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 </head>
 <body>
 
@@ -23,27 +24,25 @@
 	<div class="card">
 
 		<h2>Array</h2>
-			<pre>
-			arr = [1, 2, 3, 4, 5]
-			print(arr[0])  
-			print()
 
-			arr.append(6)
-			arr.remove(3)
-
-			for item in arr:
-			    print(item)
-
-			 OUTPUT:
-			 1
-
-			 1
-			 2
-			 4
-			 5
-			 6
-			</pre>
-
+		<textarea id="code" rows="12" cols="80">
+		arr = [1, 2, 3, 4, 5]
+		print(arr[0])
+		print()
+		
+		arr.append(6)
+		arr.remove(3)
+		
+		for item in arr:
+		    print(item)
+		</textarea>
+		
+		<br><br>
+		
+		<button onclick="runCode()">Run</button>
+		<button onclick="resetOutput()">Restart</button>
+		
+		<pre id="output"></pre>
 
 		<h2>Stack (Infix, Prefix, Postfix)</h2>
 			<pre>
@@ -187,4 +186,46 @@
 
 
 </body>
+
+	<script>
+	let pyodideReady = false;
+	let pyodide;
+	
+	async function loadPyodideAndPackages() {
+	    pyodide = await loadPyodide();
+	    pyodideReady = true;
+	}
+	
+	loadPyodideAndPackages();
+	
+	async function runCode() {
+	    if (!pyodideReady) {
+	        document.getElementById("output").textContent = "Loading Python...";
+	        return;
+	    }
+	
+	    const code = document.getElementById("code").value;
+	    const outputElement = document.getElementById("output");
+	
+	    try {
+	        pyodide.runPython(`
+	import sys
+	from io import StringIO
+	
+	sys.stdout = StringIO()
+	${code}
+	output = sys.stdout.getvalue()
+	        `);
+	
+	        outputElement.textContent = pyodide.globals.get("output");
+	    } catch (err) {
+	        outputElement.textContent = err;
+	    }
+	}
+	
+	function resetOutput() {
+	    document.getElementById("output").textContent = "";
+	}
+	</script>
+
 </html>
