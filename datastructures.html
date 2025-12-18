@@ -1,231 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Data Structures</title>
-	<link rel="stylesheet" href="style.css">
-	<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+<meta charset="UTF-8">
+<title>Data Structures - Python</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<header>
+    <h1>DATA STRUCTURES - PYTHON</h1>
+</header>
 
-	<header>
-		<h1>DATA STRUCTURES - PYTHON</h1>
-	</header>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="algorithms.html">Algorithms</a>
+    <a href="pseudocode.html">Pseudocode</a>
+    <a href="datastructures.html" class="active">Data Structures</a>
+</nav>
 
+<div class="card">
+    <h2>Array</h2>
+    <textarea id="arrayCode" rows="8" style="width:100%; background:#020617; color:#00ff95; border-radius:8px; padding:10px;">
 
-	<nav>
-	<a href="index.html">Home</a>
-	<a href="algorithms.html">Algorithms</a>
-	<a href="pseudocode.html">Pseudocode</a>
-	<a href="datastructures.html" class="active">Data Structures</a>
-	</nav>
+arr = [1, 2, 3, 4, 5]
+print(arr[0])
+print()
+arr.append(6)
+arr.remove(3)
+for item in arr:
+    print(item)
 
+    </textarea>
 
-	<div class="card">
+    <div class="btn-group">
+        <button class="run-btn" onclick="runPython('arrayCode','arrayOut')">▶ Run</button>
+    </div>
 
-		<h2>Array</h2>
-
-		<textarea id="code" rows="12" cols="80">
-		arr = [1, 2, 3, 4, 5]
-		print(arr[0])
-		print()
-		
-		arr.append(6)
-		arr.remove(3)
-		
-		for item in arr:
-		    print(item)
-		</textarea>
-		
-		<br><br>
-		
-		<button onclick="runCode()">Run</button>
-		<button onclick="resetOutput()">Restart</button>
-		
-		<pre id="output"></pre>
-
-		<h2>Stack (Infix, Prefix, Postfix)</h2>
-			<pre>
-			def infix_to_postfix(expression):
-
-			    stack = []
-			    postfix = []
-			    precedence = {'+':1, '-':1, '*':2, '/':2}
-			    
-			    for token in expression.split():
-			        if token.isalnum():  # Operand (A, B, C...)
-			            postfix.append(token)
-			        else:  
-			            while stack and precedence.get(stack[-1],0) >= precedence[token]:
-			                postfix.append(stack.pop())
-			            stack.append(token)
-			    
-			    while stack:
-			        postfix.append(stack.pop())
-			    
-			    return ' '.join(postfix)
-
-			expr = "A + B - C * D / E"
-			postfix_expr = infix_to_postfix(expr)
-			print(postfix_expr)
-
-			-----------------------------------------------------------------------------
-
-			def infix_to_prefix(expression):
-			    
-			    tokens = expression.split()[::-1]
-			    stack = []
-			    prefix = []
-			    precedence = {'+':1, '-':1, '*':2, '/':2}
-			    
-			    for token in tokens:
-			        if token.isalnum():
-			            prefix.append(token)
-			        else:
-			            while stack and precedence.get(stack[-1],0) > precedence[token]:
-			                prefix.append(stack.pop())
-			            stack.append(token)
-			    
-			    while stack:
-			        prefix.append(stack.pop())
-			    
-			    
-			    return ' '.join(prefix[::-1])
-
-			expr = "A + B - C * D / E"
-			prefix_expr = infix_to_prefix(expr)
-			print(prefix_expr)
-			</pre>
+    <div id="arrayOut" class="output-box"></div>
+</div>
 
 
-		<h2>Queue</h2>
-			<pre>
-			from collections import deque
+<div class="card">
+    <h2>Stack (Infix, Prefix, Postfix)</h2>
+    <textarea id="stackCode" rows="12" style="width:100%; background:#020617; color:#00ff95; border-radius:8px; padding:10px;">
 
-			queue = deque()
+def infix_to_postfix(expression):
+    stack = []
+    postfix = []
+    precedence = {'+':1, '-':1, '*':2, '/':2}
+    for token in expression.split():
+        if token.isalnum():
+            postfix.append(token)
+        else:
+            while stack and precedence.get(stack[-1],0) >= precedence[token]:
+                postfix.append(stack.pop())
+            stack.append(token)
+    while stack:
+        postfix.append(stack.pop())
+    return ' '.join(postfix)
 
-			queue.append(2)
-			queue.append(3)
-			queue.append(1)
-
-
-			print(queue.popleft())  
-
-			if queue:
-			    print(queue[0])      
-			else:
-			    print(False)
-
-
-			OUTPUT:
-			2
-			3
-			</pre>
+expr = "A + B - C * D / E"
+print("Postfix:", infix_to_postfix(expr))
 
 
-		<h2>Tree Traversal</h2>
-			<pre>				
-			class Node:
-			    def __init__(self, data):
-			        self.data = data
-			        self.left = None
-			        self.right = None
+def infix_to_prefix(expression):
+    tokens = expression.split()[::-1]
+    stack = []
+    prefix = []
+    precedence = {'+':1, '-':1, '*':2, '/':2}
+
+    for token in tokens:
+        if token.isalnum():
+            prefix.append(token)
+        else:
+            while stack and precedence.get(stack[-1],0) > precedence[token]:
+                prefix.append(stack.pop())
+            stack.append(token)
+
+    while stack:
+        prefix.append(stack.pop())
+
+    return ' '.join(prefix[::-1])
+
+expr = "A + B - C * D / E"
+prefix_expr = infix_to_prefix(expr)
+print("Prefix:", prefix_expr)
+
+    </textarea>
+
+    <div class="btn-group">
+        <button class="run-btn" onclick="runPython('stackCode','stackOut')">▶ Run</button>
+    </div>
+
+    <div id="stackOut" class="output-box"></div>
+</div>
 
 
-			root = Node(1)
-			root.left = Node(2)
-			root.right = Node(3)
-			root.left.left = Node(4)
-			root.left.right = Node(5)
+<div class="card">
+	<h2>Queue</h2>
+	<textarea id="queueCode" rows="12" style="width:100%; background:#020617; color:#00ff95; border-radius:8px; padding:10px;" >
+
+from collections import deque
+
+queue = deque()
+
+queue.append(2)
+queue.append(3)
+queue.append(1)
 
 
-			def inorder(node):
-			    if node:
-			        inorder(node.left)
-			        print(node.data, end=' ')
-			        inorder(node.right)
+print(queue.popleft())  
+
+if queue:
+	print(queue[0])      
+else:
+	print(False)		
+
+	</textarea>
+
+	<div class="btn-group">
+        <button class="run-btn" onclick="runPython('queueCode','queueOut')">▶ Run</button>
+    </div>
+
+    <div id="queueOut" class="output-box"></div>
+</div>
 
 
-			def preorder(node):
-			    if node:
-			        print(node.data, end=' ')
-			        preorder(node.left)
-			        preorder(node.right)
+<div class="card">
+	<h2>Tree Traversal</h2>
+	<textarea id="treeCode" rows="12" style="width:100%; background:#020617; color:#00ff95; border-radius:8px; padding:10px;" >
+
+class Node:
+	def __init__(self, data):
+		self.data = data
+		self.left = None
+		self.right = None
 
 
-			def postorder(node):
-			    if node:
-			        postorder(node.left)
-			        postorder(node.right)
-			        print(node.data, end=' ')
-
-			print("Inorder:")
-			inorder(root)
-			print()
-
-			print("\nPreorder:")
-			preorder(root)
-			print()
-
-			print("\nPostorder:")
-			postorder(root) 
+root = Node(1)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
 
 
-			OUTPUT:
-			Inorder:
-			4 2 5 1 3 
+def inorder(node):
+	if node:
+		inorder(node.left)
+		print(node.data, end=' ')
+		inorder(node.right)
 
-			Preorder:
-			1 2 4 5 3 
 
-			Postorder:
-			4 5 2 3 1 
-			</pre>
+def preorder(node):
+	if node:
+		print(node.data, end=' ')
+		preorder(node.left)
+		preorder(node.right)
 
-	</div>
 
+def postorder(node):
+	if node:
+		postorder(node.left)
+		postorder(node.right)
+		print(node.data, end=' ')
+
+print("Inorder:")
+inorder(root)
+print()
+
+print("\nPreorder:")
+preorder(root)
+print()
+
+print("\nPostorder:")
+postorder(root) 	
+
+	</textarea>
+
+	<div class="btn-group">
+        <button class="run-btn" onclick="runPython('treeCode','treeOut')">▶ Run</button>
+    </div>
+
+    <div id="treeOut" class="output-box"></div>
+</div>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+<script>
+let pyodideReady = false;
+let pyodide;
+
+async function loadPyodideAndPackages() {
+    pyodide = await loadPyodide();
+    pyodideReady = true;
+}
+loadPyodideAndPackages();
+
+async function runPython(codeId, outputId) {
+    if (!pyodideReady) {
+        alert("Python is still loading, please wait!");
+        return;
+    }
+
+    const code = document.getElementById(codeId).value;
+    const outputElement = document.getElementById(outputId);
+    outputElement.textContent = "";
+
+    try {
+        await pyodide.runPythonAsync(`
+import sys
+import js
+
+class StdoutCatcher:
+    def write(self, s):
+        js.document.getElementById("${outputId}").textContent += s
+    def flush(self): pass
+
+sys.stdout = StdoutCatcher()
+sys.stderr = StdoutCatcher()
+
+${code}
+`);
+    } catch (err) {
+        outputElement.textContent += "\nError:\n" + err;
+    }
+}
+</script>
 
 </body>
-
-	<script>
-	let pyodideReady = false;
-	let pyodide;
-	
-	async function loadPyodideAndPackages() {
-	    pyodide = await loadPyodide();
-	    pyodideReady = true;
-	}
-	
-	loadPyodideAndPackages();
-	
-	async function runCode() {
-	    if (!pyodideReady) {
-	        document.getElementById("output").textContent = "Loading Python...";
-	        return;
-	    }
-	
-	    const code = document.getElementById("code").value;
-	    const outputElement = document.getElementById("output");
-	
-	    try {
-	        pyodide.runPython(`
-	import sys
-	from io import StringIO
-	
-	sys.stdout = StringIO()
-	${code}
-	output = sys.stdout.getvalue()
-	        `);
-	
-	        outputElement.textContent = pyodide.globals.get("output");
-	    } catch (err) {
-	        outputElement.textContent = err;
-	    }
-	}
-	
-	function resetOutput() {
-	    document.getElementById("output").textContent = "";
-	}
-	</script>
-
 </html>
